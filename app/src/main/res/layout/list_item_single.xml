@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="@dimen/corner_radius"
+    android:background="@drawable/gradient_silver_theme">
+
+<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/deal_image"
+        android:layout_width="124dp"
+        android:layout_height="113dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_tv_deal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Title"
+            android:textSize="24sp"
+            android:layout_below="@+id/deal_image"
+            android:ellipsize="end"
+            tools:text="Title"/>
+
+            <TextView
+                android:id="@+id/description_tv_deal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="Description"
+                tools:text="Description"
+                android:layout_below="@id/title_tv_deal"/>
+
+
+            <TextView
+                android:id="@+id/currency_tv_deal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/naira_symbol"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_below="@id/description_tv_deal"
+                android:layout_toLeftOf="@id/price_tv_deal"/>
+
+            <TextView
+                android:id="@+id/price_tv_deal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/holo_red_light"
+                tools:text="Price"
+                android:layout_below="@id/description_tv_deal"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
