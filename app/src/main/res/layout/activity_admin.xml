@@ -51,6 +51,7 @@
         android:layout_below="@id/et_description"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Upload Image"
         app:layout_constraintEnd_toEndOf="@+id/et_description"
         app:layout_constraintStart_toStartOf="@+id/et_description"
@@ -62,13 +63,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/img_btn"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:contentDescription="Deal Image"
         android:scaleType="centerCrop"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_btn"
         tools:src="@mipmap/ic_launcher" />
 
 

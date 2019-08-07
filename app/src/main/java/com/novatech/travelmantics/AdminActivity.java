@@ -84,18 +84,18 @@ public class AdminActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICTURE_RESULT && resultCode == RESULT_OK) {
             Uri imageUri = data.getData();
+
             if (imageUri != null) {
-                final StorageReference ref = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
+                final StorageReference fileReference = FirebaseUtil.mStorageRef.child(imageUri.getLastPathSegment());
 
-                uploadTask = ref.putFile(imageUri);
-
+                uploadTask = fileReference.putFile(imageUri);
                 uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                         if (!task.isSuccessful()) {
                             throw task.getException();
                         }
-                        return ref.getDownloadUrl();
+                        return fileReference.getDownloadUrl();
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
@@ -110,13 +110,13 @@ public class AdminActivity extends AppCompatActivity {
                             Log.d("Name", pictureName);
                             AdminActivity.this.showImage(mUri);
                         } else {
-                            Toast.makeText(AdminActivity.this, "Image Upload Failed!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminActivity.this, "FAILED!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText( AdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
@@ -124,7 +124,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private void createDeal() {
         editTxtTitle.setText(mDeal.getTitle());
