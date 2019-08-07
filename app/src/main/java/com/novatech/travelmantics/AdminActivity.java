@@ -103,7 +103,7 @@ public class AdminActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
                             String mUri = downloadUri.toString();
-                            String pictureName = task.getResult().getPath();
+                            String pictureName = task.getResult().getLastPathSegment();
                             mDeal.setImageUrl(mUri);
                             mDeal.setImageName(pictureName);
                             Log.d("Uri", mUri);
@@ -181,15 +181,17 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void showImage(String url) {
-        if (url != null && !url.isEmpty()) return;
-        int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-        Picasso.get()
-                .load(url)
-                .resize(width, width*2/3)
-                .centerCrop()
-                .into(dealImageView);
+        if (url != null && !url.isEmpty()) {
+            // Getting the width of the device
+            int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+            Picasso.get()
+                    .load(url)
+                    .error(R.drawable.logo)
+                    .resize(width, width * 2 / 3)
+                    .centerCrop()
+                    .into(dealImageView);
+        }
     }
-
     private void switchEditTexts(boolean isAdmin) {
         editTxtPrice.setEnabled(isAdmin);
         editTxtDescription.setEnabled(isAdmin);
@@ -217,6 +219,7 @@ public class AdminActivity extends AppCompatActivity {
         }
         mDatabaseReference.child(mDeal.getId()).removeValue();
         if (mDeal.getImageName() != null && !mDeal.getImageName().isEmpty()) {
+            FirebaseUtil.connectStorage();
             StorageReference picRef = FirebaseUtil.mStorage.getReference().child(mDeal.getImageName());
             picRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
